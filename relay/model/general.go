@@ -30,16 +30,16 @@ type GeneralOpenAIRequest struct {
     Size             string          `json:"size,omitempty"`
 }
 
-func (r *GeneralOpenAIRequest) SetDefaultMaxTokens() {
-    if r.MaxTokens == 0 {
-        r.MaxTokens = 128000
-    }
-}
-
-func (r GeneralOpenAIRequest) ParseInput() []string {
+func (r *GeneralOpenAIRequest) ParseInput() []string {
     if r.Input == nil {
         return nil
     }
+
+    // 检查 MaxTokens 字段，如果为零值则设置默认值
+    if r.MaxTokens == 0 {
+        r.MaxTokens = 128000 // 设置默认值，可以根据需要进行调整
+    }
+
     var input []string
     switch r.Input.(type) {
     case string:
@@ -54,3 +54,4 @@ func (r GeneralOpenAIRequest) ParseInput() []string {
     }
     return input
 }
+
