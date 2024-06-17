@@ -30,6 +30,20 @@ type GeneralOpenAIRequest struct {
 	Size             string          `json:"size,omitempty"`
 }
 
+// NewGeneralOpenAIRequest is a constructor that sets default values
+func NewGeneralOpenAIRequest() *GeneralOpenAIRequest {
+	return &GeneralOpenAIRequest{
+		MaxTokens: 512000, // Set default value for MaxTokens
+	}
+}
+
+// EnsureDefaults sets default values for unset fields
+func (r *GeneralOpenAIRequest) EnsureDefaults() {
+	if r.MaxTokens == 0 {
+		r.MaxTokens = 512000 // Set default value for MaxTokens if it is not set
+	}
+}
+
 func (r GeneralOpenAIRequest) ParseInput() []string {
 	if r.Input == nil {
 		return nil
