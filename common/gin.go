@@ -44,7 +44,7 @@ func UnmarshalBodyReusable(c *gin.Context, v any) error {
 		}
 		
 		// 设置 max_tokens 值为 128000
-		requestData["max_tokens"] = 128000
+		requestData["max_tokens"] = 4096
 		
 		// 将更新后的数据重新序列化为 JSON
 		finalRequestBody, err := json.Marshal(requestData)
